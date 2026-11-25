@@ -22,6 +22,12 @@ ENTRY = (
 )
 
 out_dir = Path(OUTPUT_DIR)
+
+# The gate counts Unicode code points: 1 to 159, at least one not white.
+assert 1 <= len(ENTRY) <= 159, f"entry is {len(ENTRY)} characters"
+assert ENTRY.strip(), "entry must not be only white space"
+assert "\n" not in ENTRY, "entry must be a single line"
+
 out_dir.mkdir(parents=True, exist_ok=True)
 (out_dir / "entry.txt").write_text(ENTRY, encoding="utf-8")
 print(ENTRY)
